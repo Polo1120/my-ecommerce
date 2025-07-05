@@ -35,3 +35,10 @@
  border-color: black;
   background-color: black;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
+  font-weight: 500;
+}

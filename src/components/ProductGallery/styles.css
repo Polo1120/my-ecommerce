@@ -31,6 +31,10 @@
   z-index: 1;
 }
 
+.desktop-gallery{
+  max-height: 500px
+}
+
 @media (max-width: 768px) {
   .desktop-gallery {
     display: none;
@@ -90,4 +94,8 @@
 .thumbnail-slider-container .slick-track,
 .thumbnail-slider-container .slick-track .slick-slide{
   width: 60px!important;
+}
+
+.container-img:focus-visible{
+  outline: none;
 }

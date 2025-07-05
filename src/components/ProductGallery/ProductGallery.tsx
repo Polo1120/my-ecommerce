@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "./styles.css";
 
@@ -18,21 +18,28 @@ const ProductGallery: React.FC<Props> = ({
   onSelectImage,
   mainImage,
 }) => {
-  const [nav1, setNav1] = useState<Slider | null>(null);
-  const [nav2, setNav2] = useState<Slider | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const slider1 = useRef<Slider>(null);
   const slider2 = useRef<Slider>(null);
 
+  useEffect(() => {
+    const index = images.findIndex((img) => img.imageUrl === mainImage);
+    if (index >= 0) {
+      setCurrentIndex(index);
+      slider1.current?.slickGoTo(index);
+      slider2.current?.slickGoTo(index);
+    }
+  }, [mainImage, images]);
+
   const settingsMain = {
-    dots: false,
+    dots: true,
     arrows: true,
     infinite: true,
     speed: 300,
     slidesToShow: 1,
     slidesToScroll: 1,
-    asNavFor: nav2 || undefined,
+    asNavFor: slider2.current || undefined,
     afterChange: (index: number) => {
       setCurrentIndex(index);
       onSelectImage(images[index].imageUrl);
@@ -43,22 +50,22 @@ const ProductGallery: React.FC<Props> = ({
     dots: false,
     arrows: false,
     infinite: false,
-    slidesToShow: Math.min(images.length, 8),
+    slidesToShow: Math.min(images.length, 6),
     slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
     focusOnSelect: true,
-    asNavFor: nav1 || undefined,
+    asNavFor: slider1.current || undefined,
   };
 
   return (
     <div className="gallery-container">
       <div className="main-slider mobile">
-        <Slider {...settingsMain}>
+        <Slider {...settingsMain} ref={slider1}>
           {images.map((img, i) => (
-            <div key={i} className="container-img 3">
+            <div key={i} className="container-img">
               <img
-                className="main-image e"
+                className="main-image"
                 src={img.imageUrl}
                 alt={img.imageText || "Product"}
               />
@@ -69,17 +76,16 @@ const ProductGallery: React.FC<Props> = ({
 
       <div className="desktop-gallery">
         <div className="thumbnail-slider-container">
-          <Slider
-            {...settingsThumbs}
-            ref={(slider) => {
-              setNav2(slider);
-              slider2.current = slider;
-            }}
-          >
+          <Slider {...settingsThumbs} ref={slider2}>
             {images.map((img, i) => (
-              <div key={i} className={`container-img-thumbnail ${currentIndex === i ? "active" : ""}`} >
+              <div
+                key={i}
+                className={`container-img-thumbnail ${
+                  currentIndex === i ? "active" : ""
+                }`}
+              >
                 <img
-                  className={`thumbnail`}
+                  className="thumbnail"
                   src={img.imageUrl}
                   alt={img.imageText || "Thumbnail"}
                 />
@@ -89,17 +95,11 @@ const ProductGallery: React.FC<Props> = ({
         </div>
 
         <div className="main-slider desktop">
-          <Slider
-            {...settingsMain}
-            ref={(slider) => {
-              setNav1(slider);
-              slider1.current = slider;
-            }}
-          >
+          <Slider {...settingsMain} ref={slider1}>
             {images.map((img, i) => (
               <div key={i} className="container-img">
                 <img
-                  className="main-image " 
+                  className="main-image"
                   src={img.imageUrl}
                   alt={img.imageText || "Product"}
                 />

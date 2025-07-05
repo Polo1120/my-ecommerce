@@ -5,6 +5,7 @@ import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { useMiniCart } from "../../context/MiniCartContext";
 import { useCart } from "../../context/CartContext";
 
+
 const Header: React.FC = () => {
   const { openMiniCart } = useMiniCart();
   const { cart } = useCart();

@@ -1,0 +1,94 @@
+.product-shelf {
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+}
+
+.product-shelf h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.product-card {
+  background: #fff;
+  padding: 1rem;
+  margin: 0 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.product-card h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.product-card p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+.product-card button {
+  background-color: #2d72d9;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.product-card button:hover {
+  background-color: #1a54b3;
+}
+
+/* Slick arrows styling (optional) */
+.slick-prev, .slick-next {
+  z-index: 2;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 24px;
+  color: #555;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .product-card img {
+    height: 140px;
+  }
+
+  .product-card h4 {
+    font-size: 0.95rem;
+  }
+
+  .product-card p {
+    font-size: 0.9rem;
+  }
+
+  .product-card button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}

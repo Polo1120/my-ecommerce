@@ -16,7 +16,7 @@ export interface CartItem {
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (sku: ProductItem, color: string, talla: string) => void;
+  addToCart: (sku: ProductItem, quantity: number, color: string, talla: string) => void;
   removeFromCart: (itemToRemove: CartItem) => void;
 }
 
@@ -51,28 +51,34 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [cart, initialized]);
 
-  const addToCart = (sku: ProductItem, color: string, talla: string) => {
-    setCart((prev) => {
-      const exists = prev.find(
-        (item) =>
-          item.sku.itemId === sku.itemId &&
-          item.color === color &&
-          item.talla === talla
+ const addToCart = (
+  sku: ProductItem,
+  quantity: number,
+  color: string,
+  talla: string
+) => {
+  setCart((prev) => {
+    const exists = prev.find(
+      (item) =>
+        item.sku.itemId === sku.itemId &&
+        item.color === color &&
+        item.talla === talla
+    );
+
+    if (exists) {
+      return prev.map((item) =>
+        item.sku.itemId === sku.itemId &&
+        item.color === color &&
+        item.talla === talla
+          ? { ...item, quantity: item.quantity + quantity }
+          : item
       );
+    }
 
-      if (exists) {
-        return prev.map((item) =>
-          item.sku.itemId === sku.itemId &&
-          item.color === color &&
-          item.talla === talla
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
+    return [...prev, { sku, quantity, color, talla }];
+  });
+};
 
-      return [...prev, { sku, quantity: 1, color, talla }];
-    });
-  };
 
   const removeFromCart = (itemToRemove: CartItem) => {
     setCart((prev) =>

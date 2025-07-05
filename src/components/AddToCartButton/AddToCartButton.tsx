@@ -1,24 +1,42 @@
 import React from "react";
 import { ProductItem } from "../../types/Product";
 import { useCart } from "../../context/CartContext";
+import { useMiniCart } from "../../context/MiniCartContext";
 import "./styles.css";
 
 interface Props {
   sku: ProductItem;
+  quantity: number;
+  selectedColor?: string;
+  selectedTalla?: string;
+  onValidationFail: () => void;
 }
 
-const AddToCartButton: React.FC<Props> = ({ sku }) => {
+const AddToCartButton: React.FC<Props> = ({
+  sku,
+  quantity,
+  selectedColor,
+  selectedTalla,
+  onValidationFail,
+}) => {
   const { addToCart } = useCart();
+  const { openMiniCart } = useMiniCart();
 
-  const color = sku.Color?.[0] ?? "N/A";
-  const talla = sku.Talla?.[0] ?? "N/A";
+  const handleClick = () => {
+    if (!selectedColor || !selectedTalla) {
+      onValidationFail();
+      return;
+    }
+
+    openMiniCart();
+    addToCart(sku, quantity, selectedColor, selectedTalla);
+  };
 
   return (
-    <button className="add-to-cart" onClick={() => addToCart(sku, color, talla)}>
+    <button className="add-to-cart" onClick={handleClick}>
       Agregar al carrito
     </button>
   );
 };
-
 
 export default AddToCartButton;

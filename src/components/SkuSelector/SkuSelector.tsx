@@ -1,74 +1,100 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { ProductItem } from "../../types/Product";
 import "./styles.css";
 
 interface Props {
   products: ProductItem[];
   onSelectSku: (sku: ProductItem) => void;
+  onSelectColorTalla: (color: string, talla: string) => void;
+  showErrors: boolean;
 }
 
-const SkuSelector: React.FC<Props> = ({ products, onSelectSku }) => {
+const SkuSelector: React.FC<Props> = ({
+  products,
+  onSelectSku,
+  onSelectColorTalla,
+  showErrors = false,
+}) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedTalla, setSelectedTalla] = useState<string>("");
 
-  const uniqueColors: string[] = Array.from(
-    new Set(products.map((item) => item.Color?.[0]).filter((color): color is string => Boolean(color)))
-  );
-
-  const allTallas = Array.from(
-    new Set(products.map((item) => item.Talla?.[0]).filter((talla): talla is string => Boolean(talla)))
-  );
-
-  const tallasFiltradas = selectedColor
-    ? Array.from(
+  const uniqueColors = useMemo(
+    () =>
+      Array.from(
         new Set(
           products
-            .filter((item) => item.Color?.[0] === selectedColor)
+            .map((item) => item.Color?.[0])
+            .filter((color): color is string => Boolean(color))
+        )
+      ),
+    [products]
+  );
+
+  const allTallas = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          products
             .map((item) => item.Talla?.[0])
             .filter((talla): talla is string => Boolean(talla))
         )
-      )
-    : allTallas;
+      ),
+    [products]
+  );
 
-  
-  useEffect(() => {
-    if (selectedColor && selectedTalla) {
-      const sku = products.find(
-        (item) =>
-          item.Color?.[0] === selectedColor &&
-          item.Talla?.[0] === selectedTalla
-      );
-      if (sku) {
-        onSelectSku(sku);
-      }
-    }
-  }, [selectedColor, selectedTalla, onSelectSku, products]);
+  const tallasFiltradas = useMemo(() => {
+    if (!selectedColor) return allTallas;
+
+    return Array.from(
+      new Set(
+        products
+          .filter((item) => item.Color?.[0] === selectedColor)
+          .map((item) => item.Talla?.[0])
+          .filter((talla): talla is string => Boolean(talla))
+      )
+    );
+  }, [products, selectedColor, allTallas]);
 
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
-    setSelectedTalla(""); 
+    setSelectedTalla("");
+    onSelectColorTalla(color, "");
+
+    const sku = products.find((item) => item.Color?.[0] === color);
+    if (sku) {
+      onSelectSku(sku);
+    }
   };
 
   const handleTallaSelect = (talla: string) => {
     setSelectedTalla(talla);
-    if (!selectedColor) {
-      const sku = products.find((item) => item.Talla?.[0] === talla);
-      if (sku) {
-        onSelectSku(sku);
-        setSelectedColor(sku.Color?.[0] ?? "");
-      }
+    onSelectColorTalla(selectedColor, talla);
+
+    const sku = products.find(
+      (item) => item.Color?.[0] === selectedColor && item.Talla?.[0] === talla
+    );
+
+    if (sku) {
+      onSelectSku(sku);
     }
   };
 
   return (
     <div className="sku-selector">
       <div className="field">
-        <label>Color:</label>
+        <label>
+          Color:
+          {showErrors && !selectedColor && (
+            <span className="error-message">Selecciona un color</span>
+          )}
+        </label>
         <div className="options">
           {uniqueColors.map((color) => (
             <button
               key={color}
-              className={`option-button ${selectedColor === color ? "selected" : ""}`}
+              className={`option-button ${
+                selectedColor === color ? "selected" : ""
+              }`}
               onClick={() => handleColorSelect(color)}
             >
               {color}
@@ -78,12 +104,19 @@ const SkuSelector: React.FC<Props> = ({ products, onSelectSku }) => {
       </div>
 
       <div className="field">
-        <label>Talla:</label>
+        <label>
+          Talla:
+          {showErrors && !selectedTalla && (
+            <span className="error-message">Selecciona una talla</span>
+          )}
+        </label>
         <div className="options">
           {tallasFiltradas.map((talla) => (
             <button
               key={talla}
-              className={`option-button ${selectedTalla === talla ? "selected" : ""}`}
+              className={`option-button ${
+                selectedTalla === talla ? "selected" : ""
+              }`}
               onClick={() => handleTallaSelect(talla)}
             >
               {talla}

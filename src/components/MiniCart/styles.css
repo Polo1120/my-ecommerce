@@ -79,3 +79,41 @@
   background: none;
   cursor: pointer;
 }
+
+.minicart-footer {
+  border-top: 1px solid #ddd;
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.minicart-footer .totals {
+  margin-bottom: 1rem;
+}
+
+.minicart-footer .totals p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.3rem 0;
+  font-size: 14px;
+}
+
+.minicart-footer .totals .total {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.go-to-cart {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.go-to-cart:hover {
+  background-color: #333;
+}
