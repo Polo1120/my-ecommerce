@@ -1,0 +1,36 @@
+.sku-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option-button {
+  padding: 10px 16px;
+  border: 2px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.option-button:hover {
+  border-color: #666;
+}
+
+.option-button.selected {
+  border-color: black;
+  background-color: #f2f2f2;
+}

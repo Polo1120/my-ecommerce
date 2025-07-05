@@ -1,0 +1,65 @@
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin: 4px auto;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.thumbnail.active {
+  border-color: black;
+}
+
+.thumbnail:hover {
+  border-color: gray;
+}
+
+.main-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .desktop-gallery {
+    display: none;
+  }
+
+  .main-slider.mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .main-slider.mobile {
+    display: none;
+  }
+
+  .desktop-gallery {
+    display: flex;
+    gap: 20px;
+  }
+
+  .thumbnail-slider-container {
+    width: 80px;
+    max-height: 400px;
+    overflow: hidden;
+  }
+
+  .main-slider.desktop {
+    width: 400px;
+  }
+}
+
+.gallery-container .slick-arrow::before{
+    color: grey;
+}
