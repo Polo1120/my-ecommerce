@@ -5,6 +5,8 @@ import SkuSelector from "../components/SkuSelector/SkuSelector";
 import ProductGallery from "../components/ProductGallery/ProductGallery";
 import "./styles.css";
 import DiscountBadge from "../components/DiscountBadge";
+import AddToCartButton from "../components/AddToCartButton/AddToCartButton";
+import MiniCart from "../components/MiniCart/MiniCart";
 
 const ProductPage = () => {
   const [productList, setProductList] = useState<ProductItem[]>([]);
@@ -37,14 +39,12 @@ const ProductPage = () => {
   if (!selectedSku) return <p>Cargando...</p>;
 
   const price = selectedSku.sellers?.[0]?.commertialOffer?.Price ?? 0;
-  const listPrice = selectedSku.sellers?.[0]?.commertialOffer?.ListPrice ?? 0;
+  const listPrice = selectedSku?.sellers?.[0]?.commertialOffer?.ListPrice ?? 0;
   const brand =
     selectedSku?.sellers?.[0]?.commertialOffer?.ItemMetadataAttachment?.[0]
       ?.BrandName || "";
 
   const referenceId = selectedSku.referenceId[0].Value;
-
-  console.log(selectedSku.referenceId);
 
   return (
     <div className="product-page">
@@ -57,12 +57,18 @@ const ProductPage = () => {
 
         <div className="product-info">
           <span className="brand">{brand}</span>
-          <h2>{selectedSku.name}</h2>
+          <h3 className="name-product">{selectedSku.name}</h3>
           <span className="referenceId">Referencia: {referenceId}</span>
           <DiscountBadge price={price} listPrice={listPrice} />
-          <p className="price">${price.toLocaleString()}</p>
+          <p className="price">
+            {listPrice !== price ? `$${listPrice.toLocaleString()} - ` : ""}$
+            {price.toLocaleString()}
+          </p>
 
           <SkuSelector products={productList} onSelectSku={setSelectedSku} />
+
+          <AddToCartButton sku={selectedSku} />
+          <MiniCart />
         </div>
       </div>
     </div>

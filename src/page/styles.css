@@ -1,7 +1,7 @@
 .product-page {
-  max-width: 1300px;
+  max-width: 1250px;
   margin   : 0 auto;
-  padding  : 20px;
+  padding-top: 10px;
 }
 
 .product-container {
@@ -10,9 +10,17 @@
   gap           : 40px;
 }
 
+.product-info{
+  padding-inline: 16px;
+}
+
 @media (min-width: 768px) {
   .product-container {
     flex-direction: row;
+  }
+
+  .gallery-container{
+    padding-left: 16px;
   }
 
   .product-info {
