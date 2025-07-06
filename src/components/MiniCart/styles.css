@@ -223,5 +223,11 @@
   position        : absolute;
   top             : 5px;
   right           : 20px;
-  line-height: normal;
+  line-height     : normal;
+}
+
+
+.discount-amount,
+.discount-total {
+  color: #7a0e0e;
 }

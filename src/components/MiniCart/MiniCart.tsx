@@ -44,6 +44,8 @@ const MiniCart: React.FC = () => {
     0
   );
 
+  const totalDiscount = subtotal - total;
+
   const handleGoToCart = () => {
     closeMiniCart();
   };
@@ -120,6 +122,14 @@ const MiniCart: React.FC = () => {
                 <span>Subtotal:</span>
                 <span>${subtotal.toLocaleString()}</span>
               </p>
+              {totalDiscount > 0 && (
+                <p className="discount-total">
+                  <span>Ahorras:</span>
+                  <span className="discount-amount">
+                    -${totalDiscount.toLocaleString()}
+                  </span>
+                </p>
+              )}
               <p>
                 <span>Total:</span>
                 <span className="total">${total.toLocaleString()}</span>

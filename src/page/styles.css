@@ -68,10 +68,11 @@
 
 .discount-badge{
   font-size: 16px;
-  padding: 5px;
+  padding: 6px;
   border-radius: 4px;
   color: #fff;
   background: #7a0e0e;
+  font-weight: bold;
 }
 
 .referenceId{

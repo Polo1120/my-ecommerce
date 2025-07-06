@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { getProduct } from "../../services/Product";
 import { Product, ProductItem } from "../../types/Product";
-import { useCart } from "../../context/CartContext";
-import { useMiniCart } from "../../context/MiniCartContext";
 import "./styles.css";
 import ProductPrice from "../ProductPrice/ProductPrice";
+import AddToCartButtonShelf from "./AddToCartButtonShelf";
 
 const ProductShelf: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
-  const { addToCart } = useCart();
-  const { openMiniCart } = useMiniCart();
 
   useEffect(() => {
     const fetch = async () => {
@@ -24,14 +21,6 @@ const ProductShelf: React.FC = () => {
     };
     fetch();
   }, []);
-
-  const handleAddToCart = (sku: ProductItem) => {
-    const color = sku.Color?.[0] ?? "N/A";
-    const talla = sku.Talla?.[0] ?? "N/A";
-    const quantity = 1;
-    addToCart(sku, quantity, color, talla);
-    openMiniCart();
-  };
 
   const sliderSettings = {
     infinite: true,
@@ -54,15 +43,16 @@ const ProductShelf: React.FC = () => {
       <Slider {...sliderSettings}>
         {products.map((product) => (
           <div key={product.itemId} className="product-card">
-            <img src={product.images?.[0]?.imageUrl} alt={product.name} />
+            <div className="content-img-shelf">
+              <img src={product.images?.[0]?.imageUrl} alt={product.name} />
+            </div>
+
             <h4>{product.name}</h4>
             <ProductPrice
               listPrice={product.sellers?.[0]?.commertialOffer?.ListPrice}
               price={product.sellers?.[0]?.commertialOffer?.Price}
             />
-            <button onClick={() => handleAddToCart(product)}>
-              Agregar al carrito
-            </button>
+            <AddToCartButtonShelf sku={product} />
           </div>
         ))}
       </Slider>

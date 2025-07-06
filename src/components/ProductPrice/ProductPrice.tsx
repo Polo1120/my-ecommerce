@@ -17,7 +17,7 @@ const ProductPrice: React.FC<Props> = ({ price, listPrice }) => {
           -{" "}
         </>
       )}
-      <span>${price.toLocaleString()}</span>
+      <span className="current-price">${price.toLocaleString()}</span>
     </p>
   );
 };

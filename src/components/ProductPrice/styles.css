@@ -8,3 +8,7 @@
   color: #999;
   margin-right: 4px;
 }
+
+.current-price{
+  font-weight: bold;
+}
