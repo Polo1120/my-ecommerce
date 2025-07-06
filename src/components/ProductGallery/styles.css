@@ -1,15 +1,17 @@
 .thumbnail {
-  width: 60px;
-  height: 60px;
+  width     : 100%;
+  max-height: 60px;
   object-fit: cover;
-  margin: 4px auto;
-  border-radius: 4px;
-  border: 2px solid transparent;
-  cursor: pointer;
+  cursor    : pointer;
   transition: border-color 0.2s ease;
 }
 
-.thumbnail.active {
+
+.container-img-thumbnail {
+  border: 1.5px solid transparent;
+}
+
+.container-img-thumbnail.active {
   border-color: black;
 }
 
@@ -18,9 +20,9 @@
 }
 
 .main-image {
-  width: 100%;
-  max-height: 500px;
-  object-fit: cover;
+  width        : 100%;
+  max-height   : 500px;
+  object-fit   : cover;
   border-radius: 8px;
 }
 
@@ -28,6 +30,38 @@
 .slick-next {
   z-index: 1;
 }
+
+.desktop-gallery{
+  max-height: 500px
+}
+
+
+
+
+.container-img-thumbnail,
+.container-img {
+  background: #e3e3e3
+}
+
+.container-img-thumbnail {
+  max-width: 60px;
+}
+
+.container-img-thumbnail .thumbnail,
+.container-img .main-image {
+  mix-blend-mode: multiply;
+}
+
+.thumbnail-slider-container .slick-track,
+.thumbnail-slider-container .slick-track .slick-slide{
+  width: 60px!important;
+}
+
+.container-img:focus-visible{
+  outline: none;
+}
+
+
 
 @media (max-width: 768px) {
   .desktop-gallery {
@@ -46,20 +80,15 @@
 
   .desktop-gallery {
     display: flex;
-    gap: 20px;
+    gap    : 20px;
   }
 
   .thumbnail-slider-container {
-    width: 80px;
-    max-height: 400px;
+    width   : 80px;
     overflow: hidden;
   }
 
   .main-slider.desktop {
     width: 400px;
   }
-}
-
-.gallery-container .slick-arrow::before{
-    color: grey;
 }

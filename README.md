@@ -1,46 +1,161 @@
-# Getting Started with Create React App
+# 🛒 Sistema de Detalle de Producto y Carrito
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto implementa una página de producto con variantes, selección de cantidad y un carrito lateral (MiniCart), utilizando React y Context API.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📦 Componentes Principales
 
-### `npm start`
+### `ProductPage.tsx`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Contiene la página principal del producto. Incluye:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- `ProductGallery`: galería de imágenes con miniaturas.
+- `SkuSelector`: permite seleccionar color y talla.
+- `QuantitySelector`: selector de cantidad.
+- `AddToCartButton`: botón para agregar al carrito.
+- `DiscountBadge`: muestra el porcentaje de descuento.
+- `ProductShelf`: carrusel de productos relacionados.
+- Estado centralizado con:
+  - SKU seleccionado
+  - Color y talla
+  - Imagen principal
+  - Cantidad
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `ProductGallery.tsx`
 
-### `npm run build`
+Galería de imágenes del producto.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Usa `react-slick` para sliders.
+- En desktop incluye miniaturas verticales sincronizadas.
+- Al seleccionar una imagen, actualiza la imagen principal.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `SkuSelector.tsx`
 
-### `npm run eject`
+Permite seleccionar combinaciones válidas de color y talla.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Muestra error textual si no se selecciona alguna variante requerida.
+- Cambia el SKU seleccionado dinámicamente.
+- Los valores se actualizan en el estado principal de `ProductPage`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `AddToCartButton.tsx`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Botón para agregar al carrito:
 
-## Learn More
+- Valida si se seleccionó color y talla.
+- Agrega al carrito: SKU, cantidad, color y talla.
+- Abre automáticamente el `MiniCart`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `MiniCart.tsx`
+
+Carrito tipo drawer (desplegable desde el lado derecho).
+
+- Contenido:
+  - Imagen
+  - Nombre
+  - Color y talla
+  - Cantidad
+  - Precios (con y sin descuento)
+- Funcionalidad:
+  - Eliminar productos del carrito.
+  - Mostrar subtotal, total y total ahorrado.
+  - Botón para ir al carrito completo.
+- Cierre al hacer clic fuera del drawer.
+
+---
+
+### `QuantitySelector.tsx`
+
+Permite seleccionar la cantidad deseada antes de agregar al carrito.
+
+---
+
+### `DiscountBadge.tsx`
+
+Componente visual que muestra el porcentaje de descuento si existe diferencia entre `listPrice` y `price`.
+
+---
+
+### `ProductPrice.tsx`
+
+Componente reutilizable que muestra:
+
+- Precio anterior tachado (`listPrice`)
+- Precio actual (`price`)
+
+---
+
+## ⚙️ Contextos Globales
+
+### `CartContext.tsx`
+
+Maneja el carrito global:
+
+- Estado persistente en `localStorage`.
+- Métodos:
+  - `addToCart(sku, quantity, color, talla)`
+  - `removeFromCart(item)`
+
+### `MiniCartContext.tsx`
+
+Controla el estado de visibilidad del `MiniCart`.
+
+- Métodos:
+  - `openMiniCart()`
+  - `closeMiniCart()`
+
+---
+
+## 🔄 Lógica de Estado
+
+- `ProductPage` mantiene el estado central del producto seleccionado.
+- `SkuSelector` actualiza `sku`, `color`, y `talla`.
+- `QuantitySelector` actualiza la cantidad.
+- Al hacer clic en `AddToCartButton`, se actualiza el carrito global.
+- El MiniCart se abre automáticamente.
+
+---
+
+## 💾 Persistencia
+
+- El carrito se guarda y recupera desde `localStorage` automáticamente.
+
+---
+
+## 🧠 Consideraciones Técnicas
+
+- Se usaron `useMemo` y `useCallback` para evitar renders innecesarios.
+- Se manejó un control cuidadoso de dependencias en `useEffect`.
+- Los errores de validación se muestran en la UI, no como alertas.
+- El proyecto está preparado para escalar fácilmente con múltiples variantes o atributos adicionales.
+
+---
+
+## 🚀 Librerías Usadas
+
+- `react-slick`: sliders para galería de imágenes y vitrinas.
+- `classnames`: manejo dinámico de clases (opcional).
+- `localStorage`: persistencia de carrito.
+
+---
+
+## 📌 Futuras Mejoras
+
+- Página completa de carrito.
+- Integración con checkout.
+- Manejo de stock por SKU.
+- Agregar animaciones de entrada/salida en el MiniCart.
+
+---
+
+## 🧑‍💻 Autor
+
+Desarrollado por Edgardo Polo.

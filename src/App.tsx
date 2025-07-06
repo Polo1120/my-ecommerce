@@ -1,15 +1,14 @@
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
-import './App.css';
-import ProductPage from './page/ProductPage';
+import ProductPage from "./page/ProductPage";
 import Header from "./components/Header/Header";
+import MiniCart from "./components/MiniCart/MiniCart";
 
 function App() {
   return (
     <>
-    <Header/>
-    <ProductPage />
+      <Header />
+      <ProductPage />
+      <MiniCart/>
     </>
   );
 }

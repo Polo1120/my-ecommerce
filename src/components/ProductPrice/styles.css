@@ -1,0 +1,14 @@
+.price {
+  font-size: 1.2rem;
+  color: #111;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 4px;
+}
+
+.current-price{
+  font-weight: bold;
+}
