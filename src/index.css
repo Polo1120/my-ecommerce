@@ -36,3 +36,102 @@ code {
   content: "\e91a";
 
 }
+
+
+/*  top loader.css */
+.top-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background-color: #000;
+  z-index: 9999;
+  transition: width 0.3s ease-out;
+}
+
+.top-progress-bar.loading {
+  width: 100%;
+  animation: progressBar 1.5s linear infinite;
+}
+
+@keyframes progressBar {
+  0% {
+    left: -100%;
+    width: 100%;
+  }
+  50% {
+    left: 0%;
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 100%;
+  }
+}
+
+
+/* top loader.css */
+
+/* loader.css */
+.loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem auto;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* loader.css */
+
+
+
+/* icon */
+
+.accordion-trigger:after,
+.delete-product::before,
+.close-minicart::before,
+.icon-cart::before {
+  font-family: 'icomoon';
+}
+
+.icon-cart::before {
+  font-size: 18px;
+  content  : "\e912"
+}
+
+.close-minicart::before {
+  font-size: 18px;
+  content  : "\e911"
+}
+
+.delete-product::before {
+  font-size: 18px;
+  content  : "\e907"
+}
+
+
+.accordion-trigger[aria-expanded="false"]::after {
+  content: "\e906";
+  font-size: 16px;
+
+}
+
+
+.accordion-trigger[aria-expanded="true"]::after {
+  content: "\e905";
+}

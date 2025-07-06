@@ -45,4 +45,10 @@ export interface Product {
   id: string;
   items: ProductItem[];
   brand: string;
+  CARACTERÍSTICAS: string[]
+  COMPOSICIÓN: string[]
+  categories: string[]
+  description:string
+
+  
 }

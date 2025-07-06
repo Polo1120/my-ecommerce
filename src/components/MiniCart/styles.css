@@ -191,27 +191,14 @@
   display: none;
 }
 
-.delete-product,
+
+
 .close-minicart,
-.icon-cart::before {
-  font-family: 'icomoon';
+.delete-product{
+  padding: 0;
 }
 
 
-.icon-cart::before {
-  font-size: 18px;
-  content  : "\e912"
-}
-
-.close-minicart::before {
-  font-size: 18px;
-  content  : "\e911"
-}
-
-.delete-product::before {
-  font-size: 18px;
-  content  : "\e916"
-}
 
 
 .badge {
