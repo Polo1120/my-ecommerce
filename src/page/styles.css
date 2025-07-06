@@ -7,26 +7,14 @@
 .product-container {
   display       : flex;
   flex-direction: column;
-  gap           : 40px;
+  gap           : 30px;
 }
 
 .product-info{
   padding-inline: 16px;
 }
 
-@media (min-width: 768px) {
-  .product-container {
-    flex-direction: row;
-  }
 
-  .gallery-container{
-    padding-left: 16px;
-  }
-
-  .product-info {
-    width: 65%;
-  }
-}
 
 .product-image {
   flex           : 1;
@@ -63,4 +51,44 @@
   font-weight: 500;
   margin-bottom: 8px;
   display: block;
+}
+
+
+.content-price-discount{
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  margin-top: 8px;
+}
+
+.content-price-discount .price{
+  margin: 0;
+  font-size: 16px;
+}
+
+.discount-badge{
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 4px;
+  color: #fff;
+  background: #7a0e0e;
+}
+
+.referenceId{
+  font-size: 16px;
+}
+
+
+@media (min-width: 768px) {
+  .product-container {
+    flex-direction: row;
+  }
+
+  .gallery-container{
+    padding-left: 16px;
+  }
+
+  .product-info {
+    width: 65%;
+  }
 }

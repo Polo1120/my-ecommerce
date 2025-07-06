@@ -12,7 +12,7 @@ const DiscountBadge: React.FC<Props> = ({ price, listPrice }) => {
 
   return (
     <div className="discount-badge">
-      -{discount}%
+      {discount}%
     </div>
   );
 };

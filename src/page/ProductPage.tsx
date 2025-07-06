@@ -94,9 +94,10 @@ const ProductPage = () => {
           <span className="brand">{brand}</span>
           <h3 className="name-product">{sku.name}</h3>
           <span className="referenceId">Referencia: {referenceId}</span>
-          <DiscountBadge price={price} listPrice={listPrice} />
-          <ProductPrice listPrice={listPrice} price={price} />
-
+          <div className="content-price-discount">
+            <ProductPrice listPrice={listPrice} price={price} />
+            <DiscountBadge price={price} listPrice={listPrice} />
+          </div>
           <SkuSelector
             products={productList}
             onSelectSku={(sku) =>

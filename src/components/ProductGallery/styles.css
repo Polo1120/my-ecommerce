@@ -35,6 +35,34 @@
   max-height: 500px
 }
 
+
+
+
+.container-img-thumbnail,
+.container-img {
+  background: #e3e3e3
+}
+
+.container-img-thumbnail {
+  max-width: 60px;
+}
+
+.container-img-thumbnail .thumbnail,
+.container-img .main-image {
+  mix-blend-mode: multiply;
+}
+
+.thumbnail-slider-container .slick-track,
+.thumbnail-slider-container .slick-track .slick-slide{
+  width: 60px!important;
+}
+
+.container-img:focus-visible{
+  outline: none;
+}
+
+
+
 @media (max-width: 768px) {
   .desktop-gallery {
     display: none;
@@ -63,39 +91,4 @@
   .main-slider.desktop {
     width: 400px;
   }
-}
-
-.gallery-container .slick-arrow::before {
-  color: grey;
-}
-
-.gallery-container .slick-arrow.slick-prev {
-  left: 0;
-}
-
-.gallery-container .slick-arrow.slick-next {
-  right: 0;
-}
-
-.container-img-thumbnail,
-.container-img {
-  background: #e3e3e3
-}
-
-.container-img-thumbnail {
-  max-width: 60px;
-}
-
-.container-img-thumbnail .thumbnail,
-.container-img .main-image {
-  mix-blend-mode: multiply;
-}
-
-.thumbnail-slider-container .slick-track,
-.thumbnail-slider-container .slick-track .slick-slide{
-  width: 60px!important;
-}
-
-.container-img:focus-visible{
-  outline: none;
 }
