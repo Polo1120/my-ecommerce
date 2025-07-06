@@ -1,0 +1,26 @@
+.product-description {
+  margin-top: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.description-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  transition: all 0.3s ease;
+  margin-block: 10px;
+}
+
+.description-text.expanded {
+  display: block;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.95rem;
+  text-decoration: underline;
+}

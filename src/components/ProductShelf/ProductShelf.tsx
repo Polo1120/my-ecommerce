@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { getProduct } from "../../services/Product";
 import { Product, ProductItem } from "../../types/Product";
+import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import ProductPrice from "../ProductPrice/ProductPrice";
 import AddToCartButtonShelf from "./AddToCartButtonShelf";
 
 const ProductShelf: React.FC = () => {
   const [products, setProducts] = useState<ProductItem[]>([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
+   useEffect(() => {
     const fetch = async () => {
       try {
         const data: Product[] = await getProduct();
@@ -37,12 +39,21 @@ const ProductShelf: React.FC = () => {
     ],
   };
 
+  const handleProductClick = (itemId: string) => {
+    navigate(`/producto/${itemId}`);
+  };
+
   return (
     <div className="product-shelf">
       <h3>Productos relacionados</h3>
       <Slider {...sliderSettings}>
         {products.map((product) => (
-          <div key={product.itemId} className="product-card">
+          <div
+            key={product.itemId}
+            className="product-card"
+            onClick={() => handleProductClick(product.itemId)}
+            style={{ cursor: "pointer" }}
+          >
             <div className="content-img-shelf">
               <img src={product.images?.[0]?.imageUrl} alt={product.name} />
             </div>
